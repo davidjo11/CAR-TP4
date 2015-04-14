@@ -26,7 +26,7 @@
             <fieldset>
             <legend>Informations sur l'auteur</legend>
                 <label for="auteur">Auteur du livre :</label>
-                <input type="text" name="author" id="author" value="<%= session.getAttribute( "parution" ) %>"/>
+                <input type="text" name="author" id="author" value="<%= session.getAttribute( "author" ) %>"/>
             </fieldset>  
                 
             <input type="submit" value="Envoyer" />
