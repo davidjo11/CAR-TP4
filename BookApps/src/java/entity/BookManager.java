@@ -10,7 +10,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import java.util.List;
 import javax.ejb.Remote;
-import javax.persistence.PersistenceContextType;
 
 /**
  *
