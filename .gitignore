@@ -1,1 +1,5 @@
 /BookEJB/build/
+/BookEJB/dist/
+/BookApps/nbproject/private/
+/BookApps/build/
+/BookApps/dist/

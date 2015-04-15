@@ -24,6 +24,9 @@ public class Book implements Serializable {
     private String author;
     
     private int date_p;
+
+    public Book() {
+    }
     
     public Book(String title ,String author, int date) {
         this.author = author;

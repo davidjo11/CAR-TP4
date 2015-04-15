@@ -5,11 +5,12 @@
  */
 package servlets;
 
-import ejbservices.Initialisation;
+import ejbservices.ListAuthors;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
 import javax.ejb.EJB;
+import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 
@@ -17,43 +18,58 @@ import javax.servlet.annotation.WebServlet;
  *
  * @author thibaud
  */
-@WebServlet(name="Initialisation", urlPatterns={"/Initialisation"})
-public class InitialisationServlet extends HttpServlet {
+@WebServlet(name="ListAuthors", urlPatterns={"/ListAuthors"})
+public class ListAuthorsServlet extends HttpServlet {
     
     @EJB
-    Initialisation init;
+    ListAuthors listAuthors;
     
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    
+    protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
         
         try {
-            init.initialisation();
-
+            List<String> list = listAuthors.list();
+         
             response.setContentType( "text/html" );
-
+         
             PrintWriter out = response.getWriter();
-
+         
             out.println( "<html><body>" ); 
-            out.println( "<h1>Initialisation effectuee !</h1>" ); 
-            out.println( "</body></html>" );
-            
-            out.close();
+        
+            out.println( "<h1>Liste des auteurs :</h1>" );
+            out.println( "<ul>" );
+        
+            for (String author : list)
+               out.println( "<li>"+author+"</li>" );
+        
+            out.println( "</ul>" );
+        
+            out.println( "</body></html>" ); 
+
         }
         catch (NamingException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
+         
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
-    } 
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }
+
     
 }
