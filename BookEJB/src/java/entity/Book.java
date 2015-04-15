@@ -17,13 +17,6 @@ import javax.persistence.Table;
  * @author thibaud
  */
 @Entity
-@Table(name = "Book")
-@NamedQueries({@NamedQuery(name = "Book.findByAuthor", 
-  query = "SELECT b FROM Book b WHERE b.author = :author"), 
-               @NamedQuery(name = "Book.findByTitle", 
-  query = "SELECT b FROM Book b WHERE b.title = :title"), 
-               @NamedQuery(name = "Book.findByDate", 
-  query = "SELECT b FROM Book b WHERE b.date = :date")})
 public class Book implements Serializable {
     
     private static final long serialVersionUID = 1L;
