@@ -4,6 +4,21 @@
     Author     : thibaud
 --%>
 
+<%
+    if (session.getAttribute("author") == null) {
+        session.setAttribute( "author", "" );
+    }
+    
+    if (session.getAttribute("title") == null) {
+        session.setAttribute( "title", "" );
+    }
+        
+    if (session.getAttribute("parution") == null) {
+        session.setAttribute( "parution", "" );
+    }
+   
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,6 +45,7 @@
             </fieldset>  
                 
             <input type="submit" value="Envoyer" />
+            <input type="reset" value="Effacer" />
         </form>
     </body>
 </html>

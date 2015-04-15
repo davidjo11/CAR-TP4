@@ -4,6 +4,21 @@
     Author     : thibaud
 --%>
 
+<%
+    if (session.getAttribute("author") == null) {
+        session.setAttribute( "author", "" );
+    }
+    
+    if (session.getAttribute("title") == null) {
+        session.setAttribute( "title", "" );
+    }
+        
+    if (session.getAttribute("parution") == null) {
+        session.setAttribute( "parution", "" );
+    }
+   
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -26,10 +41,11 @@
             <fieldset>
             <legend>Informations sur l'auteur</legend>
                 <label for="auteur">Auteur du livre :</label>
-                <input type="text" name="author" id="author" value="<%= session.getAttribute( "author" ) %>"/>
+                <input type="text" name="author" id="author" value="<%= session.getAttribute( "parution" ) %>"/>
             </fieldset>  
                 
             <input type="submit" value="Envoyer" />
+            <input type="reset" value="Effacer" />
         </form>
     </body>
 </html>

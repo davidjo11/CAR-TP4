@@ -30,15 +30,19 @@ public class ListAuthors implements SessionBean {
        return stocks.listAuthors();
     }
 
+    @Override
     public void ejbActivate() {
     } 
 
+    @Override
     public void ejbPassivate() {
     }
 
+    @Override
      public void ejbRemove() {
     }
 
+    @Override
     public void setSessionContext(SessionContext arg0) throws EJBException, RemoteException {
     }
    

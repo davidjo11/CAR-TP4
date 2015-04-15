@@ -22,32 +22,33 @@ public class ListAuthorsServlet extends HttpServlet {
     @EJB
     ListAuthors listAuthors;
     
-     public void service( HttpServletRequest request,  HttpServletResponse response ) throws ServletException, IOException {
+    
+    public void service( HttpServletRequest request,  HttpServletResponse response ) throws ServletException, IOException {
         
         try {
             List<String> list = listAuthors.list();
          
-        response.setContentType( "text/html" );
+            response.setContentType( "text/html" );
          
-        PrintWriter out = response.getWriter();
+            PrintWriter out = response.getWriter();
          
-        out.println( "<html><body>" ); 
+            out.println( "<html><body>" ); 
         
-        out.println( "<h1>Liste des auteurs :</h1>" );
-        out.println( "<ul>" );
+            out.println( "<h1>Liste des auteurs :</h1>" );
+            out.println( "<ul>" );
         
-        for (String author : list)
-             out.println( "<li>"+author+"</li>" );
+            for (String author : list)
+               out.println( "<li>"+author+"</li>" );
         
-        out.println( "</ul>" );
+            out.println( "</ul>" );
         
-        out.println( "</body></html>" ); 
+            out.println( "</body></html>" ); 
         
-         }
+        }
         catch (NamingException e) {
             e.getStackTrace();
         }
          
-     }
+    }
     
 }

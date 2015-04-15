@@ -5,9 +5,12 @@
  */
 package servlets;
 
+import ejbservices.Initialisation;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
+import javax.ejb.EJB;
+import javax.naming.NamingException;
 
 /**
  *
@@ -15,16 +18,25 @@ import java.io.*;
  */
 public class InitialisationServlet extends HttpServlet {
     
-     public void service( HttpServletRequest request,  HttpServletResponse response ) throws ServletException, IOException {
-         
-        response.setContentType( "text/html" );
-         
-        PrintWriter out = response.getWriter();
-         
-        out.println( "<html><body>" ); 
-        out.println( "<h1>Initialisation effectuee !</h1>" ); 
-        out.println( "</body></html>" ); 
-         
-     }
+    @EJB
+    Initialisation init;
+    
+    public void service( HttpServletRequest request,  HttpServletResponse response ) throws ServletException, IOException {
+        
+        try {
+            init.initialisation();
+
+            response.setContentType( "text/html" );
+
+            PrintWriter out = response.getWriter();
+
+            out.println( "<html><body>" ); 
+            out.println( "<h1>Initialisation effectuee !</h1>" ); 
+            out.println( "</body></html>" ); 
+        }
+        catch (NamingException e) {
+            e.getStackTrace();
+        }
+    }
     
 }

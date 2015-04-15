@@ -36,15 +36,19 @@ public class Initialisation implements SessionBean {
        
     }
 
+    @Override
     public void ejbActivate() {
     } 
 
+    @Override
     public void ejbPassivate() {
     }
 
+    @Override
      public void ejbRemove() {
     }
 
+    @Override
     public void setSessionContext(SessionContext arg0) throws EJBException, RemoteException {
     }
    
