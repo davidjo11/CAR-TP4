@@ -12,18 +12,21 @@ import java.io.*;
 import javax.ejb.EJB;
 import java.util.List;
 import javax.naming.NamingException;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author thibaud
  */
+@WebServlet(name="ListAuthors", urlPatterns={"/ListAuthors"})
 public class ListAuthorsServlet extends HttpServlet {
     
     @EJB
     ListAuthors listAuthors;
     
     
-    public void service( HttpServletRequest request,  HttpServletResponse response ) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
+            throws ServletException, IOException {
         
         try {
             List<String> list = listAuthors.list();
@@ -43,12 +46,25 @@ public class ListAuthorsServlet extends HttpServlet {
             out.println( "</ul>" );
         
             out.println( "</body></html>" ); 
-        
+            out.close();
         }
         catch (NamingException e) {
             e.getStackTrace();
         }
          
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+        processRequest(request, response);
+    } 
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
     
 }

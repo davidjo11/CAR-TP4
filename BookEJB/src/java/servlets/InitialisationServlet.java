@@ -11,17 +11,20 @@ import javax.servlet.*;
 import java.io.*;
 import javax.ejb.EJB;
 import javax.naming.NamingException;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author thibaud
  */
+@WebServlet(name="Initialisation", urlPatterns={"/Initialisation"})
 public class InitialisationServlet extends HttpServlet {
     
     @EJB
     Initialisation init;
     
-    public void service( HttpServletRequest request,  HttpServletResponse response ) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         
         try {
             init.initialisation();
@@ -32,11 +35,25 @@ public class InitialisationServlet extends HttpServlet {
 
             out.println( "<html><body>" ); 
             out.println( "<h1>Initialisation effectuee !</h1>" ); 
-            out.println( "</body></html>" ); 
+            out.println( "</body></html>" );
+            
+            out.close();
         }
         catch (NamingException e) {
             e.getStackTrace();
         }
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+        processRequest(request, response);
+    } 
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+        processRequest(request, response);
     }
     
 }
