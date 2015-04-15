@@ -5,7 +5,7 @@
  */
 package entity;
 
-import javax.ejb.Singleton;
+import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author thibaud
  */
-@Singleton
+@Stateless
 public class BookManager implements IBookManager {
     
     @PersistenceContext
@@ -28,8 +28,12 @@ public class BookManager implements IBookManager {
         return em.find(Book.class, title);
     }
     
-    public List<Book> list() {
+    public List<Book> listBooks() {
         return em.createQuery("SELECT b FROM Book b ORDER BY b.title").getResultList();
+    }
+    
+    public List<String> listAuthors() {
+        return em.createQuery("SELECT DISTINCT b.author FROM Book b ORDER BY b.author").getResultList();
     }
     
 }

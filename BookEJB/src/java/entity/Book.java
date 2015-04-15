@@ -8,9 +8,6 @@ package entity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 /**
  *
@@ -27,6 +24,12 @@ public class Book implements Serializable {
     private String author;
     
     private int date_p;
+    
+    public Book(String title ,String author, int date) {
+        this.author = author;
+        this.date_p = date;
+        this.title = title;
+    }
 
     public String getTitle() {
         return this.title;

@@ -19,5 +19,7 @@ public interface IBookManager {
     
     public Book search(String title);
     
-    public List<Book> list();
+    public List<Book> listBooks();
+    
+    public List<String> listAuthors();
 }
