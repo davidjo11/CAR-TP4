@@ -5,8 +5,8 @@
  */
 package ejbservices;
 
-import entity.Book;
-import entity.IBookManager;
+import entity.book.Book;
+import entity.book.IBookManager;
 import javax.ejb.Stateless;
 import javax.naming.Context;
 import javax.naming.InitialContext;

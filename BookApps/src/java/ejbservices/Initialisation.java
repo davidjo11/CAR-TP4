@@ -5,8 +5,10 @@
  */
 package ejbservices;
 
-import entity.Book;
-import entity.IBookManager;
+import entity.book.Book;
+import entity.book.IBookManager;
+import entity.user.IUserManager;
+import entity.user.User;
 import javax.ejb.Stateless;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -25,6 +27,10 @@ public class Initialisation implements SessionBean {
     
     public void initialisation() throws NamingException {
        Context context = new InitialContext();
+       
+       IUserManager user = (IUserManager) context.lookup("UserService");
+       user.add(new User("admin","admin",0));
+       
        IBookManager stocks = (IBookManager) context.lookup("BookService");
        
        stocks.add(new Book("Babar a la plage","Dora l'exploratrice", 2001));
@@ -33,6 +39,7 @@ public class Initialisation implements SessionBean {
        stocks.add(new Book("Il etait une fois dans le nord","Sergio Leone", 1976));
        stocks.add(new Book("Le bon, la brute et l'alcoolique","Sergio Leone", 1975));
        stocks.add(new Book("Comment avoir son master informatique","Johnny Jackson", 1999));
+ 
        
     }
 

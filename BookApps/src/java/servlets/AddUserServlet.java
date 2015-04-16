@@ -5,13 +5,11 @@
  */
 package servlets;
 
-import ejbservices.ListBooks;
-import entity.book.Book;
+import ejbservices.AddUser;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
 import javax.ejb.EJB;
-import java.util.List;
 import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 
@@ -19,40 +17,29 @@ import javax.servlet.annotation.WebServlet;
  *
  * @author thibaud
  */
-@WebServlet(name="ListBooks", urlPatterns={"/ListBooks"})
-public class ListBooksServlet extends HttpServlet {
+@WebServlet(name="AddUser", urlPatterns={"/AddUser"})
+public class AddUserServlet extends HttpServlet {
     
     @EJB
-    ListBooks listBooks;
-    
+    AddUser adduser;
     
     protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
         
         try {
-            List<Book> list = listBooks.list();
-         
-            response.setContentType( "text/html" );
-         
-            PrintWriter out = response.getWriter();
-         
-            out.println( "<html><body>" ); 
-        
-            out.println( "<h1>Liste des livres :</h1>" );
-            out.println( "<table>" );
-        
-            for (Book book : list)
-               out.println( "<tr><td>"+book.getTitle()+"</td><td>"+book.getAuthor()+"</td><td>"+book.getDate()+"</td></tr>" );
-        
-            out.println( "</table>" );
-        
-            out.println( "</body></html>" ); 
-
+            String user = request.getParameter("user");
+            String password = request.getParameter("password");
+            
+            
+            adduser.add(user, password, 1);
+            
+            response.sendRedirect(response.encodeRedirectURL("http://localhost:8080/BookApps/index.jsp"));
+            
+        } catch (NamingException ex) {
+            ex.printStackTrace();
         }
-        catch (NamingException e) {
-            e.printStackTrace();
-        }
-         
+        
+        
     }
     
     @Override

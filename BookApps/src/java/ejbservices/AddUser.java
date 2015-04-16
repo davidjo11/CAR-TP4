@@ -5,7 +5,8 @@
  */
 package ejbservices;
 
-import entity.book.IBookManager;
+import entity.user.IUserManager;
+import entity.user.User;
 import javax.ejb.Stateless;
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,20 +15,20 @@ import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import javax.ejb.EJBException;
 import java.rmi.RemoteException;
-import java.util.List;
 
 /**
  *
  * @author thibaud
  */
 @Stateless
-public class ListAuthors implements SessionBean {
+public class AddUser implements SessionBean {
     
-    public List<String> list() throws NamingException {
+    public void add(String pseudo, String password, int status) throws NamingException {
        Context context = new InitialContext();
-       IBookManager stocks = (IBookManager) context.lookup("BookService");
+       IUserManager stocks = (IUserManager) context.lookup("UserService");
        
-       return stocks.listAuthors();
+       stocks.add(new User(pseudo,password,status));
+       
     }
 
     @Override

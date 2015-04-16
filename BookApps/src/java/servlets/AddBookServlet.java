@@ -9,8 +9,6 @@ import ejbservices.AddBook;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
@@ -36,13 +34,7 @@ public class AddBookServlet extends HttpServlet {
             
             addbook.add(title, author, Integer.parseInt(parution));
             
-            response.setContentType( "text/html" );
-
-            PrintWriter out = response.getWriter();
-
-            out.println( "<html><body>" ); 
-            out.println( "<h1>"+title+" a ete enregistre !</h1>" ); 
-            out.println( "</body></html>" );
+            response.sendRedirect(response.encodeRedirectURL("http://localhost:8080/BookApps/index.jsp"));
             
         } catch (NamingException ex) {
             ex.printStackTrace();
