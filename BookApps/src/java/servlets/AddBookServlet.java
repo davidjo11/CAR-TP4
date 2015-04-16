@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import ejbservices.AddBook;
+import ejbservices.BookServices;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
@@ -21,7 +21,7 @@ import javax.servlet.annotation.WebServlet;
 public class AddBookServlet extends HttpServlet {
     
     @EJB
-    AddBook addbook;
+    BookServices bookServ;
     
     
     protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
@@ -32,7 +32,7 @@ public class AddBookServlet extends HttpServlet {
             String parution = request.getParameter("parution");
             String title = request.getParameter("title");
             
-            addbook.add(title, author, Integer.parseInt(parution));
+            bookServ.add(title, author, Integer.parseInt(parution));
             
             response.sendRedirect(response.encodeRedirectURL("http://localhost:8080/BookApps/index.jsp"));
             

@@ -5,6 +5,7 @@
  */
 package ejbservices;
 
+import entity.book.Book;
 import entity.book.IBookManager;
 import javax.ejb.Stateless;
 import javax.naming.Context;
@@ -21,13 +22,28 @@ import java.util.List;
  * @author thibaud
  */
 @Stateless
-public class ListAuthors implements SessionBean {
+public class BookServices implements SessionBean {
     
-    public List<String> list() throws NamingException {
+    public void add(String title, String author, int annee) throws NamingException {
+       Context context = new InitialContext();
+       IBookManager stocks = (IBookManager) context.lookup("BookService");
+       
+       stocks.add(new Book(title,author, annee));
+       
+    }
+    
+    public List<String> listAuthors() throws NamingException {
        Context context = new InitialContext();
        IBookManager stocks = (IBookManager) context.lookup("BookService");
        
        return stocks.listAuthors();
+    }
+    
+    public List<Book> listBooks() throws NamingException {
+       Context context = new InitialContext();
+       IBookManager stocks = (IBookManager) context.lookup("BookService");
+       
+       return stocks.listBooks();
     }
 
     @Override

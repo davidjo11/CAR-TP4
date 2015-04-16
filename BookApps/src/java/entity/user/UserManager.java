@@ -5,7 +5,6 @@
  */
 package entity.user;
 
-import entity.book.*;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
 import javax.persistence.EntityManager;
@@ -24,23 +23,23 @@ public class UserManager implements IUserManager {
     EntityManager em;
     
     @Override
-    public void add(User user) {
+    public void add(Client user) {
         em.persist(user);
     }
     
     @Override
-    public User search(String login) {
-        return em.find(User.class, login);
+    public Client search(String login) {
+        return em.find(Client.class, login);
     }
     
     @Override
-    public List<User> listUsers() {
-        return em.createQuery("SELECT u FROM User u ORDER BY u.pseudo").getResultList();
+    public List<Client> listUsers() {
+        return em.createQuery("SELECT u FROM Client u ORDER BY u.pseudo").getResultList();
     }
     
     @Override
     public int getStatus(String login) {
-        return em.find(User.class, login).getStatus();
+        return em.find(Client.class, login).getStatus();
     }
     
 }

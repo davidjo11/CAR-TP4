@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import ejbservices.ListBooks;
+import ejbservices.BookServices;
 import entity.book.Book;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
@@ -23,14 +23,14 @@ import javax.servlet.annotation.WebServlet;
 public class ListBooksServlet extends HttpServlet {
     
     @EJB
-    ListBooks listBooks;
+    BookServices bookServ;
     
     
     protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
         
         try {
-            List<Book> list = listBooks.list();
+            List<Book> list = bookServ.listBooks();
          
             response.setContentType( "text/html" );
          

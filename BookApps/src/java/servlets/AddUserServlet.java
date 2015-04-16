@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import ejbservices.AddUser;
+import ejbservices.UserServices;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
@@ -21,7 +21,7 @@ import javax.servlet.annotation.WebServlet;
 public class AddUserServlet extends HttpServlet {
     
     @EJB
-    AddUser adduser;
+    UserServices userServ;
     
     protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,7 +31,7 @@ public class AddUserServlet extends HttpServlet {
             String password = request.getParameter("password");
             
             
-            adduser.add(user, password, 1);
+            userServ.add(user, password, 1);
             
             response.sendRedirect(response.encodeRedirectURL("http://localhost:8080/BookApps/index.jsp"));
             

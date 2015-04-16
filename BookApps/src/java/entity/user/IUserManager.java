@@ -15,11 +15,11 @@ import java.util.List;
 @Remote
 public interface IUserManager {
     
-    public void add(User user);
+    public void add(Client user);
     
-    public User search(String login);
+    public Client search(String login);
     
-    public List<User> listUsers();
+    public List<Client> listUsers();
     
     public int getStatus(String login);
 }

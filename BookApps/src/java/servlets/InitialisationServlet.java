@@ -5,7 +5,7 @@
  */
 package servlets;
 
-import ejbservices.Initialisation;
+import ejbservices.InitialisationService;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
@@ -21,7 +21,7 @@ import javax.servlet.annotation.WebServlet;
 public class InitialisationServlet extends HttpServlet {
     
     @EJB
-    Initialisation init;
+    InitialisationService init;
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

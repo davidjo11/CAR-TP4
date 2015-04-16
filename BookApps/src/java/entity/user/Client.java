@@ -14,7 +14,7 @@ import javax.persistence.Id;
  * @author thibaud
  */
 @Entity
-public class User implements Serializable {
+public class Client implements Serializable {
     
     private static final long serialVersionUID = 2L;
     
@@ -25,10 +25,10 @@ public class User implements Serializable {
     
     private int status;
 
-    public User() {
+    public Client() {
     }
     
-    public User(String pseudo, String password, int status) {
+    public Client(String pseudo, String password, int status) {
         this.pseudo = pseudo;
         this.password = password;
         this.status = status;
@@ -67,10 +67,10 @@ public class User implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof User)) {
+        if (!(object instanceof Client)) {
             return false;
         }
-        User other = (User) object;
+        Client other = (Client) object;
         if (this.pseudo.equals(other.pseudo))
             return true;
         else
@@ -79,7 +79,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.User[ "+this.pseudo+" ]";
+        return "entity.Client[ "+this.pseudo+" ]";
     }
     
 }
