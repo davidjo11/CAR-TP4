@@ -12,7 +12,6 @@ import javax.servlet.*;
 import java.io.*;
 import javax.ejb.EJB;
 import java.util.List;
-import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -30,27 +29,32 @@ public class ListBooksServlet extends HttpServlet {
             throws ServletException, IOException {
         
         try {
+            
+            HttpSession session = request.getSession(true);
+            
+            session.getAttribute("USER").equals(1);
+             
             List<Book> list = bookServ.listBooks();
-         
+
             response.setContentType( "text/html" );
-         
+
             PrintWriter out = response.getWriter();
-         
+
             out.println( "<html><body>" ); 
-        
+
             out.println( "<h1>Liste des livres :</h1>" );
             out.println( "<table>" );
-        
-            for (Book book : list)
-               out.println( "<tr><td>"+book.getTitle()+"</td><td>"+book.getAuthor()+"</td><td>"+book.getDate()+"</td></tr>" );
-        
-            out.println( "</table>" );
-        
-            out.println( "</body></html>" ); 
 
+            for (Book book : list)
+                out.println( "<tr><td>"+book.getTitle()+"</td><td>"+book.getAuthor()+"</td><td>"+book.getDate()+"</td></tr>" );
+
+            out.println( "</table>" );
+
+            out.println( "</body></html>" ); 
+                
         }
-        catch (NamingException e) {
-            e.printStackTrace();
+        catch (Exception e) {
+            response.sendRedirect(response.encodeRedirectURL("index.jsp"));
         }
          
     }

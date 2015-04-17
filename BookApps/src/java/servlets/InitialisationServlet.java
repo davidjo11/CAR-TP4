@@ -29,7 +29,7 @@ public class InitialisationServlet extends HttpServlet {
         try {
             init.initialisation();
 
-            response.sendRedirect(response.encodeRedirectURL("http://localhost:8080/BookApps/index.jsp"));
+            response.sendRedirect(response.encodeRedirectURL("index.jsp"));
             
         }
         catch (NamingException e) {

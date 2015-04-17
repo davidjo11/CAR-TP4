@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 15 avr. 2015, 19:03:28
+    Document   : inscription.jsp
+    Created on : 17 avr. 2015, 19:42:35
     Author     : thibaud
 --%>
 
@@ -9,19 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Index</title>
+        <title>Inscription</title>
     </head>
     <body>
+        <h1>Inscription au site :</h1>
         
-        <h1>Veuillez vous connecter :</h1>
-        
-        <form method="post" action="Connexion">
+        <form method="post" action="AddUser">
             <p><input type="text" name="user" placeholder="Identifiant"></p>
             <p><input type="password" name="password" placeholder="Mot de passe"></p>
-            <p><input type="submit" value="Connexion"></p>
+            <p><input type="submit" value="S'inscrire"></p>
         </form>
-        
-        <a href="Initialisation">Initialisation (indispensable pour la premiere utilisation)</a>
-        <a href="inscription.jsp">S'inscrire</a>
     </body>
 </html>

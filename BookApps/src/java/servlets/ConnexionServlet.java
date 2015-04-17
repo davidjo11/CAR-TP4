@@ -17,8 +17,8 @@ import javax.servlet.annotation.WebServlet;
  *
  * @author thibaud
  */
-@WebServlet(name="AddUser", urlPatterns={"/AddUser"})
-public class AddUserServlet extends HttpServlet {
+@WebServlet(name="Connexion", urlPatterns={"/Connexion"})
+public class ConnexionServlet extends HttpServlet {
     
     @EJB
     UserServices userServ;
@@ -30,10 +30,17 @@ public class AddUserServlet extends HttpServlet {
             String user = request.getParameter("user");
             String password = request.getParameter("password");
             
-            
-            userServ.add(user, password, 1);
-            
-            response.sendRedirect(response.encodeRedirectURL("index.jsp"));
+            if (userServ.isGoodLogin(user, password)) {
+                
+                HttpSession session = request.getSession(true);
+                session.setAttribute( "USER", userServ.getStatus(user) );
+                
+                response.sendRedirect(response.encodeRedirectURL("mainpage.jsp"));
+            }
+            else {
+                response.sendRedirect(response.encodeRedirectURL("index.jsp"));
+            }
+           
             
         } catch (NamingException ex) {
             ex.printStackTrace();

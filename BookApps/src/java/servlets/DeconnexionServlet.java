@@ -10,15 +10,14 @@ import javax.servlet.http.*;
 import javax.servlet.*; 
 import java.io.*;
 import javax.ejb.EJB;
-import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author thibaud
  */
-@WebServlet(name="AddUser", urlPatterns={"/AddUser"})
-public class AddUserServlet extends HttpServlet {
+@WebServlet(name="Deconnexion", urlPatterns={"/Deconnexion"})
+public class DeconnexionServlet extends HttpServlet {
     
     @EJB
     UserServices userServ;
@@ -26,19 +25,9 @@ public class AddUserServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
         
-        try {
-            String user = request.getParameter("user");
-            String password = request.getParameter("password");
-            
-            
-            userServ.add(user, password, 1);
-            
-            response.sendRedirect(response.encodeRedirectURL("index.jsp"));
-            
-        } catch (NamingException ex) {
-            ex.printStackTrace();
-        }
-        
+        HttpSession session = request.getSession(true);
+        session.removeAttribute("USER");
+        response.sendRedirect(response.encodeRedirectURL("index.jsp"));
         
     }
     

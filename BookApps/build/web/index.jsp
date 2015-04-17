@@ -9,12 +9,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Index</title>
     </head>
     <body>
-        <a href="Initialisation">Test initialisation</a>
-        <a href="ListAuthors">Test ListAuthors</a>
-        <a href="ListBooks">Test ListBooks</a>
-        <a href="formulaire.jsp">Formulaire</a>
+        
+        <h1>Veuillez vous connecter :</h1>
+        
+        <form method="post" action="Connexion">
+            <p><input type="text" name="user" placeholder="Identifiant"></p>
+            <p><input type="password" name="password" placeholder="Mot de passe"></p>
+            <p><input type="submit" value="Connexion"></p>
+        </form>
+        
+        <a href="Initialisation">Initialisation (indispensable pour la premiere utilisation)</a>
+        <a href="inscription.jsp">S'inscrire</a>
     </body>
 </html>

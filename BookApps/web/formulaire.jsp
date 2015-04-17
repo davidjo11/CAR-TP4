@@ -4,6 +4,21 @@
     Author     : thibaud
 --%>
 
+
+<%
+    try {
+        if (session.getAttribute("USER").equals("1")) {
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+        }
+            
+    }
+    catch (Exception e) {
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request, response);
+    }
+%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

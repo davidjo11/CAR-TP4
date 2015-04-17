@@ -11,7 +11,4 @@ Avancement:
 
 
 Reste à :
-+ Mettre en forme le HTML :
-Par ex : Index : formulaire de connexion + lien vers creer un utilisateur + Initialisation
-+ Creer le formulaire de connexion + d'inscription (+ Servlet associée)
 + Implémenter le Panier

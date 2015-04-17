@@ -11,7 +11,6 @@ import javax.servlet.*;
 import java.io.*;
 import javax.ejb.EJB;
 import java.util.List;
-import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -29,27 +28,33 @@ public class ListAuthorsServlet extends HttpServlet {
             throws ServletException, IOException {
         
         try {
+           
+            HttpSession session = request.getSession(true);
+            
+            session.getAttribute("USER").equals(1);
+                
             List<String> list = bookServ.listAuthors();
-         
+
             response.setContentType( "text/html" );
-         
+
             PrintWriter out = response.getWriter();
-         
+
             out.println( "<html><body>" ); 
-        
+
             out.println( "<h1>Liste des auteurs :</h1>" );
             out.println( "<ul>" );
-        
+
             for (String author : list)
-               out.println( "<li>"+author+"</li>" );
-        
+            out.println( "<li>"+author+"</li>" );
+
             out.println( "</ul>" );
-        
-            out.println( "</body></html>" ); 
+
+            out.println( "</body></html>" );
+          
 
         }
-        catch (NamingException e) {
-            e.printStackTrace();
+        catch (Exception e) {
+            response.sendRedirect(response.encodeRedirectURL("index.jsp"));
         }
          
     }

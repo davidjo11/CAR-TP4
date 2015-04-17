@@ -34,7 +34,7 @@ public class AddBookServlet extends HttpServlet {
             
             bookServ.add(title, author, Integer.parseInt(parution));
             
-            response.sendRedirect(response.encodeRedirectURL("http://localhost:8080/BookApps/index.jsp"));
+            response.sendRedirect(response.encodeRedirectURL("mainpage.jsp"));
             
         } catch (NamingException ex) {
             ex.printStackTrace();
