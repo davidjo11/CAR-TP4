@@ -6,16 +6,17 @@
 package servlets;
 
 import ejbservices.UserServices;
+import exception.ManagerNotFoundException;
 import javax.servlet.http.*; 
 import javax.servlet.*; 
 import java.io.*;
 import javax.ejb.EJB;
-import javax.naming.NamingException;
 import javax.servlet.annotation.WebServlet;
 
 /**
- *
- * @author thibaud
+ *  Servlet qui ajoute un utilisateur au manager d'utilisateur.
+ *  Cette servlet est déclenchée lors de l'envoi d'un formulaire pour ajouter un utilisateur manuellement.
+ * @author Thibaud VERBARE & David JOSIAS
  */
 @WebServlet(name="AddUser", urlPatterns={"/AddUser"})
 public class AddUserServlet extends HttpServlet {
@@ -23,41 +24,74 @@ public class AddUserServlet extends HttpServlet {
     @EJB
     UserServices userServ;
     
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request,  HttpServletResponse response)
             throws ServletException, IOException {
         
         try {
+            // On récupère les champs du formulaire :
             String user = request.getParameter("user");
             String password = request.getParameter("password");
             
-            
-            userServ.add(user, password, 1);
-            
+            if (userServ.getStatus(user) == -1)
+                userServ.add(user, password, 1);
+            // Une fois ajouté on peut revenir à l'accueil :
             response.sendRedirect(response.encodeRedirectURL("index.jsp"));
             
-        } catch (NamingException ex) {
-            ex.printStackTrace();
+        } catch (ManagerNotFoundException ex) {
+            // Si probleme de managers : -> not found
+            response.sendRedirect(response.encodeRedirectURL("notfound.jsp"));
         }
         
         
     }
     
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
+    }// </editor-fold>
 
     
 }

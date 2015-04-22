@@ -12,32 +12,47 @@ import java.util.List;
 import javax.ejb.Remote;
 
 /**
- *
- * @author thibaud
+ * Implémentation du manager d'utilisateurs.
+ * @author Thibaud VERBAERE & David JOSIAS
  */
 @Stateless(mappedName="UserService")
 @Remote(IUserManager.class)
 public class UserManager implements IUserManager {
     
+    // La BDD :
     @PersistenceContext(unitName = "user-unit")
     EntityManager em;
     
-    @Override
+    /**
+     * Ajoute un client au manager.
+     * @param user l'utilisateur a ajouter
+     */
     public void add(Client user) {
         em.persist(user);
     }
     
-    @Override
+    /**
+     * Recherche un utilisateur par son login.
+     * @param login le login de l'utilisateur a trouver
+     * @return l'utilisateur
+     */
     public Client search(String login) {
         return em.find(Client.class, login);
     }
     
-    @Override
+    /**
+     * Liste l'ensemble des utilisateurs du manager.
+     * @return la liste des utilisateurs
+     */
     public List<Client> listUsers() {
         return em.createQuery("SELECT u FROM Client u ORDER BY u.pseudo").getResultList();
     }
     
-    @Override
+    /**
+     * Retourne le status d'un utilisateur dont on connait le pseudo.
+     * @param login le pseudo de l'utilisateur.
+     * @return le status de l'utilisateur ou -1 si on ne trouve pas
+     */
     public int getStatus(String login) {
         return em.find(Client.class, login).getStatus();
     }

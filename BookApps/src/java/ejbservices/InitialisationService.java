@@ -6,59 +6,72 @@
 package ejbservices;
 
 import entity.book.Book;
-import entity.book.IBookManager;
-import entity.user.IUserManager;
-import entity.user.Client;
+import exception.ManagerNotFoundException;
 import javax.ejb.Stateless;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 import javax.ejb.EJBException;
 import java.rmi.RemoteException;
+import javax.ejb.EJB;
 
 /**
- *
- * @author thibaud
+ * Initialise une session pour l'utilisateur.
+ * @author Thibaud VERBAERE & David JOSIAS
  */
 @Stateless
 public class InitialisationService implements SessionBean {
     
-    public void initialisation() throws NamingException {
-       Context context = new InitialContext();
-       
-       IUserManager user = (IUserManager) context.lookup("UserService");
-       
-       user.add(new Client("admin","admin",0));
-       
-       IBookManager stocks = (IBookManager) context.lookup("BookService");
-       
-       stocks.add(new Book("Babar a la plage","Dora l'exploratrice", 2001));
-       stocks.add(new Book("Meurtre a Lille1","Agatha Christie", 1987));
-       stocks.add(new Book("Ma vie","David Josias", 2014));
-       stocks.add(new Book("Il etait une fois dans le nord","Sergio Leone", 1976));
-       stocks.add(new Book("Le bon, la brute et l'alcoolique","Sergio Leone", 1975));
-       stocks.add(new Book("Comment avoir son master informatique","Johnny Jackson", 1999));
-       
+    @EJB
+    BookServices bookServ;
+    @EJB
+    CartServices cart;
+    @EJB
+    CommandServices commandServ;
+    @EJB
+    UserServices userServ;
+    
+    /**
+     * Initialise une session pour l'utilisateur.
+     * @throws exception.ManagerNotFoundException s'il existe un probleme avec l'un des managers
+     */
+    public void initialisation() throws ManagerNotFoundException {
+        
+        // Ajout de l'admin.
+        if ( userServ.getStatus("admin") == -1 )
+            userServ.add("admin","admin",0);
+           
+        if (bookServ.searchBook("Babar a la plage").isEmpty())
+            bookServ.add("Babar a la plage","Dora l'exploratrice", 2001);
+        if (bookServ.searchBook("Meurtre a Lille1").isEmpty())
+            bookServ.add("Meurtre a Lille1","Agatha Christie", 1987);
+        if (bookServ.searchBook("Ma vie").isEmpty())
+            bookServ.add("Ma vie","David Josias", 2014);
+        if (bookServ.searchBook("Il etait une fois dans le nord").isEmpty())
+            bookServ.add("Il etait une fois dans le nord","Sergio Leone", 1976);
+        if (bookServ.searchBook("Le bon la brute et le sherif").isEmpty())
+            bookServ.add("Le bon la brute et le sherif","Sergio Leone", 1975);
+        if (bookServ.searchBook("Comment avoir son master informatique").isEmpty())
+            bookServ.add("Comment avoir son master informatique","Johnny Jackson", 1999);
+        
     }
 
     @Override
-    public void ejbActivate() {
-    } 
-
-    @Override
-    public void ejbPassivate() {
+    public void setSessionContext(SessionContext ctx) throws EJBException, RemoteException {
+      
     }
 
     @Override
-     public void ejbRemove() {
+    public void ejbRemove() throws EJBException, RemoteException {
+        
     }
 
     @Override
-    public void setSessionContext(SessionContext arg0) throws EJBException, RemoteException {
+    public void ejbActivate() throws EJBException, RemoteException {
+    
     }
-   
-    public void ejbCreate() {
+
+    @Override
+    public void ejbPassivate() throws EJBException, RemoteException {
+        
     }
 }

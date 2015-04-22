@@ -1,7 +1,7 @@
 <%-- 
     Document   : inscription.jsp
     Created on : 17 avr. 2015, 19:42:35
-    Author     : thibaud
+    Author     : Thibaud VERBAERE & David JOSIAS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

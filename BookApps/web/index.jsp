@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 15 avr. 2015, 19:03:28
-    Author     : thibaud
+    Author     : Thibaud VERBAERE & David JOSIAS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -21,7 +21,7 @@
             <p><input type="submit" value="Connexion"></p>
         </form>
         
-        <a href="Initialisation">Initialisation (indispensable pour la premiere utilisation)</a>
+        <a href="Initialisation">Initialisation (indispensable pour la premiere utilisation)</a><br>
         <a href="inscription.jsp">S'inscrire</a>
     </body>
 </html>

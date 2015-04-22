@@ -1,7 +1,7 @@
 <%-- 
     Document   : index
     Created on : 14 avr. 2015, 14:50:52
-    Author     : thibaud
+    Author     : Thibaud VERBAERE & David JOSIAS
 --%>
 
 

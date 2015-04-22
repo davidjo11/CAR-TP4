@@ -10,8 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- *
- * @author thibaud
+ *  Classe représentant une entité Livre.
+ * @author Thibaud VERBAERE et David JOSIAS
  */
 @Entity
 public class Book implements Serializable {
@@ -25,35 +25,68 @@ public class Book implements Serializable {
     
     private int date_p;
 
+    /**
+     * Constructeur par défaut.
+     */
     public Book() {
     }
     
+    /**
+     * Constructeur de livre.
+     * @param title le titre du livre
+     * @param author l'auteur du livre
+     * @param date la date de parution du livre
+     */
     public Book(String title ,String author, int date) {
         this.author = author;
         this.date_p = date;
         this.title = title;
     }
 
+    /**
+     * Retourne le titre du livre.
+     * @return le titre du livre
+     */
     public String getTitle() {
         return this.title;
     }
 
+    /**
+     * Change le titre du livre.
+     * @param title le nouveau titre du livre
+     */
     public void setTitle(String title) {
         this.title = title;
     }
     
+    /**
+     * Retourne l'auteur du livre.
+     * @return l'auteur du livre.
+     */
     public String getAuthor() {
         return this.author;
     }
 
+    /**
+     * Change l'auteur du livre.
+     * @param author le nouvel auteur du livre
+     */
     public void setAuthor(String author) {
         this.author = author;
     }
     
+    /**
+     * Retourne la date de parution du livre.
+     * @return la date de parution du livre
+     */
     public int getDate() {
         return this.date_p;
     }
 
+    /**
+     * Change la date de parution du livre.
+     * @param date la nouvel date de parution du livre
+     */
     public void setDate(int date) {
         this.date_p = date;
     }
