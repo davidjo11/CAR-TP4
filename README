@@ -1,0 +1,103 @@
+########################################################################################################
+############################################# TP3 CAR : RMI  ###########################################
+########################################################################################################
+
+Auteurs : Thibaud VERBAERE & David JOSIAS
+
+------------------------
+------Introduction------
+------------------------
+Dans ce TP nous devions créer une web-application capable de gèrer des livres, des membres etc...
+Dans un premier temps, il a fallu créer un formulaire de saisie et un récapitulatif des informations
+envoyées en JSP.
+Ce travail est disponible dans le projet Book qui contenant :
+- index.jsp : page contenant un formulaire de trois champs.
+- recap.jsp : page qui affiche les informations envoyées par le formulaire.
+L'index mémorise les précédentes valeurs.
+Puis nous avons créé l'application en utilisant des servlets, des sessions-beans et le design pattern
+façade permettant la gestion des données (base de données).
+Ce design pattern se compose de trois fichiers :
+- Un fichier Entity représentant l'enregistrement de la base de données.
+- Une interface pour le manager de la donnée.
+- Une implémentation de cette interface.
+
+------------------------
+----Implémentation------
+------------------------
+En utilisant le design-pattern, nous avons créé trois managers afin de gerer les livres (Book), les
+membres (User) ainsi que les commandes (Command).
+Une commande est composé d'un titre de livre et d'un pseudo (celui qui commande).
+Un utilisateur contient un pseudo, un mot de passe et un statut (0 pour admin et 1 pour membre).
+Un Livre contient un titre, un auteur et une date de parution.
+Le panier est un Bean Stateful, capable de stocker les données dans une liste pour chaque utilisateur.
+Chacune de ses entités (Stateful et Stateless) est associée à un service (SessionBean) qui sera utilisé
+dans les servlets.
+
+Voici la description de la navigation sur l'application.
+- index.jsp : page contenant un formulaire de connexion.
+Depuis cette page, on peut invoquer la servlet d'initialisation ou au formulaire d'inscription.
+Si la connexion est approuvée alors l'utilisateur accède à mainpage.jsp.
+- inscription.jsp : page avec formulaire permettant la création d'utilisateurs.
+En cliquant sur "S'inscrire", il y a une invocation de la servlet d'ajout d'utilisateur.
+Puis une fois la servlet executée, on est redirigé vers index.jsp.
+- mainpage.jsp
+- formulaire.jsp : page avec formulaire permettant la création de livre (uniquement accéssible par l'admin).
+- notfound.jsp : redirection possible si un des services (managers) est défaillant.
+
+Les servlets :
+- AddBook : permet l'ajout de livres.
+Accessible pour les admins.
+Si succès, redirige l'utilisateur vers mainpage.jsp.
+Si un autre utilisateur veut acceder à la page il est redirigé automatiquement vers index.jsp.
+- AddUser : permet l'ajout d'utilisateur.
+Accessible pour tous.
+Si succès, redirige l'utilisateur vers index.jsp.
+- CommandBook : permet l'ajout d'un livre dans le panier.
+Accessible pour les membres connectés.
+Si succès, redirige l'utilisateur vers le panier.
+Si un autre utilisateur veut acceder à la page il est redirigé automatiquement vers index.jsp.
+- Connexion : permet la connexion.
+Accessible pour tous.
+Redirige l'utilisateur vers index.jsp quelque soit le déroulement de la servlet.
+- Deconnexion :
+Accessible pour les membres connectés.
+Redirige l'utilisateur vers index.jsp.
+- Initialisation : permet d'initialiser l'application avec quelques livres prédéfinis.
+Accessible pour tous.
+Redirige l'utilisateur vers index.jsp.
+- ListAuthors : permet de lister les auteurs présents en base.
+Accessible pour les membres connectés.
+Créé une nouvelle page html.
+- ListBooks : permet de lister les livres présents en base.
+Accessible pour les membres connectés.
+Créé une nouvelle page html.
+- ListCommandBooks : permet de lister les livres commandés (= contenu du panier).
+Accessible pour les membres connectés.
+Créé une nouvelle page html.
+- ListCommands : permet de lister les commandes présentes en base.
+Accessible pour les administrateurs.
+Créé une nouvelle page html.
+- RemoveCommandBook : permet de supprimer un livre du panier.
+Accessible pour les membres connectés.
+Redirige l'utilisateur vers le panier (= raffraichi la page).
+- SearchBook : permet d'effectuer une recherche sur un titre de livre.
+Accessible pour les membres connectés.
+Créé une nouvelle page html.
+- SendCommand : permet de valider une commande.
+Accessible pour les membres connectés.
+Redirige l'utilisateur vers le panier (= raffraichi la page).
+Les livres du panier sont tous supprimés.
+
+------------------------
+-------Les Tests--------
+------------------------
+Par manque de temps, les tests n'ont pu être effectués. Aucuns mauvais comportements n'a été trouvé.
+
+------------------------
+-------Problèmes--------
+------------------------
+Pas de problèmes pour ce TP.
+
+
+Vous trouverez l'intégralité de la documentation dans /BookApps/dist ainsi ...
+qu'un executable qui ne s'execute pas !
